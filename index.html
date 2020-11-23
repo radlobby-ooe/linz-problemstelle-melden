@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Problemstelle melden...</title>
+    <!-- Pointer events polyfill for old browsers, see https://caniuse.com/#feat=pointer -->
+    <script src="https://unpkg.com/elm-pep"></script>
+    <style>
+      .map {
+        width: 100%;
+        height:480px;
+      }
+    </style>
+  </head>
+  <body style="background-color: rgb(240, 235, 248)">
+    <div id="map" class="map" style="width: 100%; height:480px; "></div>
+    <script src="main.js"></script>
+    <br/>
+    <div class="container">
+    <div id="firstStep" class="top-left"><font face="Verdana">Bitte Position durch Klicken auswählen.</font></div>
+    <div id="nextStep" class="top-left" style="visibility: hidden"><font face="Verdana">Position passt? <button id="confirmPosition"><b>Weiter zur Beschreibung</b></button></font></div>
+    </div>
+    <script>
+      document.getElementById('confirmPosition').onclick = function () {
+        if (pickerApi.picker.isSet()) {
+          let pos = pickerApi.picker.getLocation();
+          window.location.href = 'https://docs.google.com/forms/d/e/1FAIpQLScMv1tVFd1-19esS_HKsl9e2saRUenkUbOiVBXljnUCIFUIgQ/viewform?usp=pp_url&entry.1646312533=' + pos;
+        }
+      };
+      document.addEventListener('pickerSet', event => {
+        console.log('picker set');
+        document.getElementById('firstStep').style.visibility = "hidden";
+        document.getElementById('nextStep').style.visibility = "visible";
+        document.getElementById('confirmPosition').disabled = false;
+      });
+      document.addEventListener('pickerUnset', event => {
+        console.log('picker unset');
+        document.getElementById('firstStep').style.visibility = "visible";
+        document.getElementById('nextStep').style.visibility = "hidden";
+        document.getElementById('confirmPosition').disabled = true;
+      });
+    </script>
+  </body>
+</html>
