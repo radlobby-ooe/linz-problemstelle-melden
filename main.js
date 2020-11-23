@@ -12,7 +12,6 @@ import Feature from "ol/Feature";
 import Point from "ol/geom/Point";
 import Icon from "ol/style/Icon";
 import {containsExtent} from 'ol/extent';
-import Modify from "ol/interaction/modify";
 import Translate from "ol/interaction/translate";
 
 var iconStyle = new Style({
@@ -43,10 +42,6 @@ var map = new Map({
     center: fromLonLat([14.28611, 48.30639]),
     zoom: 14,
   }),
-});
-
-var modify = new Modify({
-  source: vectorSource
 });
 
 var translate = new Translate({
