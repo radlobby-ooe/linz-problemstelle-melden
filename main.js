@@ -12,7 +12,7 @@ import Feature from 'ol/Feature';
 import Point from 'ol/geom/Point';
 import Icon from 'ol/style/Icon';
 import {containsExtent} from 'ol/extent';
-import Translate from 'ol/interaction/translate';
+import Translate from 'ol/interaction/Translate';
 
 var iconStyle = new Style({
   image: new Icon({
