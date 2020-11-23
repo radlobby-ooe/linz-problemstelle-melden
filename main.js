@@ -8,11 +8,11 @@ import {toLonLat} from 'ol/proj';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import {Fill, Stroke, Style, Text} from 'ol/style';
-import Feature from "ol/Feature";
-import Point from "ol/geom/Point";
-import Icon from "ol/style/Icon";
+import Feature from 'ol/Feature';
+import Point from 'ol/geom/Point';
+import Icon from 'ol/style/Icon';
 import {containsExtent} from 'ol/extent';
-import Translate from "ol/interaction/translate";
+import Translate from 'ol/interaction/translate';
 
 var iconStyle = new Style({
   image: new Icon({
