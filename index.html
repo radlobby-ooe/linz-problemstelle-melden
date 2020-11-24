@@ -14,10 +14,17 @@
             box-sizing: border-box;
         }
 
-        /* Create two equal columns that floats next to each other */
+        /* Create 3 equal columns that floats next to each other */
         .column {
             float: left;
             width: 33%;
+            padding: 0px;
+        }
+
+        /* Create 3 equal columns that floats next to each other */
+        .column2 {
+            float: left;
+            width: 50%;
             padding: 0px;
         }
 
@@ -32,34 +39,26 @@
 <body style="background-color: rgb(240, 235, 248)">
 <div id="map" class="map"></div>
 <script src="main.js"></script>
-<div class="row" style="margin-top: 10px">
-    <div class="column">
-        <div class="row">
-            <div class="column" style="align: center; text-align: center;">
-                <button id="describeM" style="max-width: 150px;height: 100%;opacity: 0.8;" disabled>
-                    <div><img src="assets/mail.png" height="50px"/></div>
-                    <div style="align: center; text-align: center;">Mail<br/>&nbsp;</div>
-                </button>
-            </div>
-            <div class="column" style="align: center; text-align: center;">
-                <button id="describeF" style="max-width: 150px;height: 100%;opacity: 0.8;" disabled>
-                    <div><img src="assets/list.png" height="50px"/></div>
-                    <div style="align: center; text-align: center;">Formular<br/>&nbsp;</div>
-                </button>
-            </div>
-            <div class="column" style="align: center; text-align: center;">
-                <button id="describeGF" style="max-width: 150px;height: 100%" disabled>
-                    <div><img src="assets/list-g-f.png" height="50px"/></div>
-                    <div style="align: center; text-align: center;"><b>Formular<br/>mit Foto</br></b></div>
-                </button>
-            </div>
-        </div>
+<div style="margin-top: 10px">
+    <div class="column" style="align: center; text-align: center;">
+        <button id="describeGF" style="max-width: 150px;height: 100%" disabled>
+            <div><img src="assets/list-g-f.png" height="50px"/></div>
+            <div style="align: center; text-align: center;"><b>Formular<br/>mit Foto</br></b></div>
+        </button>
     </div>
-    <div class="column">
-        <div id="firstStep" class="top-left"><font face="Verdana">Bitte Position durch Klicken auswählen...</font></div>
+    <div class="column" style="align: center; text-align: center;">
+        <button id="describeF" style="max-width: 150px;height: 100%;opacity: 0.8;" disabled>
+            <div><img src="assets/list.png" height="50px"/></div>
+            <div style="align: center; text-align: center;">Formular<br/>&nbsp;</div>
+        </button>
     </div>
-    <div class="column">
+    <div class="column" style="align: center; text-align: center;">
+        <button id="describeM" style="max-width: 150px;height: 100%;opacity: 0.8;" disabled>
+            <div><img src="assets/mail.png" height="50px"/></div>
+            <div style="align: center; text-align: center;">Mail<br/>&nbsp;</div>
+        </button>
     </div>
+    <div id="firstStep" style="align: center; text-align: center;"><font face="Verdana">Bitte Position auswählen...</font></div>
 </div>
 <script>
     function toggleButton(buttonId, visible) {
@@ -74,6 +73,7 @@
         }
         document.getElementById(buttonId).disabled = false;
     }
+
     document.getElementById('describeGF').onclick = function () {
         if (pickerApi.picker.isSet()) {
             let pos = pickerApi.picker.getLocation();
@@ -89,7 +89,7 @@
     document.getElementById('describeM').onclick = function () {
         if (pickerApi.picker.isSet()) {
             let pos = pickerApi.picker.getLocation();
-            window.open('mailto:linz@radlobby.at?subject=Problemstelle melden bei (Bitte Straße angeben) '+  pos+'&body=(Bitte Problem beschreiben) GPS-Position='+pos);
+            window.open('mailto:linz@radlobby.at?subject=Problemstelle melden bei (Bitte Straße angeben)&body=(Bitte Problem beschreiben) GPS-Position ' + pos);
         }
     };
     document.addEventListener('pickerSet', event => {
