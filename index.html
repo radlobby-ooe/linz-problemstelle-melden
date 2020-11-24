@@ -1,43 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <title>Problemstelle melden...</title>
     <!-- Pointer events polyfill for old browsers, see https://caniuse.com/#feat=pointer -->
     <script src="https://unpkg.com/elm-pep"></script>
     <style>
-      .map {
-        width: 100%;
-        height:480px;
-      }
-    </style>
-  </head>
-  <body style="background-color: rgb(240, 235, 248)">
-    <div id="map" class="map" style="width: 100%; height:480px; "></div>
-    <script src="main.js"></script>
-    <br/>
-    <div class="container">
-    <div id="firstStep" class="top-left"><font face="Verdana">Bitte Position durch Klicken auswählen.</font></div>
-    <div id="nextStep" class="top-left" style="visibility: hidden"><font face="Verdana">Position passt? <button id="confirmPosition"><b>Weiter zur Beschreibung</b></button></font></div>
-    </div>
-    <script>
-      document.getElementById('confirmPosition').onclick = function () {
-        if (pickerApi.picker.isSet()) {
-          let pos = pickerApi.picker.getLocation();
-          window.location.href = 'https://docs.google.com/forms/d/e/1FAIpQLSdGOOoSioi46-auNoHvbUVyhrNDCR35rlVl8KHV5Rw9NtgpgQ/viewform?usp=pp_url&entry.1646312533=' + pos;
+        .map {
+            width: 100%;
+            height: 480px;
         }
-      };
-      document.addEventListener('pickerSet', event => {
+
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Create two equal columns that floats next to each other */
+        .column {
+            float: left;
+            width: 33%;
+            padding: 0px;
+        }
+
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+    </style>
+</head>
+<body style="background-color: rgb(240, 235, 248)">
+<div id="map" class="map"></div>
+<script src="main.js"></script>
+<div class="row" style="margin-top: 10px">
+    <div class="column">
+        <div class="row">
+            <div class="column" style="align: center; text-align: center;">
+                <button id="describeF" style="max-width: 150px;height: 100%;opacity: 0.8;" disabled>
+                    <div><img src="dist/data/list.png" height="50px"/></div>
+                    <div style="align: center; text-align: center;">Formular<br/>&nbsp;</div>
+                </button>
+            </div>
+            <div class="column" style="align: center; text-align: center;">
+                <button id="describeM" style="max-width: 150px;height: 100%;opacity: 0.8;" disabled>
+                    <div><img src="dist/data/mail.png" height="50px"/></div>
+                    <div style="align: center; text-align: center;">Mail<br/>&nbsp;</div>
+                </button>
+            </div>
+            <div class="column" style="align: center; text-align: center;">
+                <button id="describeGF" style="max-width: 150px;height: 100%" disabled>
+                    <div><img src="dist/data/list-g-f.png" height="50px"/></div>
+                    <div style="align: center; text-align: center;"><b>Formular<br/>mit Foto</br></b></div>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="column">
+        <div id="firstStep" class="top-left"><font face="Verdana">Bitte Position durch Klicken auswählen...</font></div>
+    </div>
+    <div class="column">
+    </div>
+</div>
+<script>
+    function toggleButton(buttonId, visible) {
+        if (window.document.documentMode) {
+            // on IE do nothing
+        } else {
+            if (visible) {
+                document.getElementById(buttonId).style.display = "inline";
+            } else {
+                document.getElementById(buttonId).style.display = "none";
+            }
+        }
+        document.getElementById(buttonId).disabled = false;
+    }
+    document.getElementById('describeGF').onclick = function () {
+        if (pickerApi.picker.isSet()) {
+            let pos = pickerApi.picker.getLocation();
+            window.location.href = 'https://docs.google.com/forms/d/e/1FAIpQLSdGOOoSioi46-auNoHvbUVyhrNDCR35rlVl8KHV5Rw9NtgpgQ/viewform?usp=pp_url&entry.1646312533=' + pos;
+        }
+    };
+    document.getElementById('describeF').onclick = function () {
+        if (pickerApi.picker.isSet()) {
+            let pos = pickerApi.picker.getLocation();
+            window.location.href = 'https://docs.google.com/forms/d/e/1FAIpQLSe6LSipRxsvMv4fpCy5COBmJ4Cd1wVbQyoPZHttpXJQUfQrLA/viewform?usp=pp_url&entry.1646312533=' + pos;
+        }
+    };
+    document.getElementById('describeM').onclick = function () {
+        if (pickerApi.picker.isSet()) {
+            let pos = pickerApi.picker.getLocation();
+            window.open('mailto:linz@radlobby.at?subject=Problemstelle melden bei (Bitte Straße angeben) '+  pos+'&body=(Bitte Problem beschreiben) GPS-Position='+pos);
+        }
+    };
+    document.addEventListener('pickerSet', event => {
         console.log('picker set');
         document.getElementById('firstStep').style.visibility = "hidden";
-        document.getElementById('nextStep').style.visibility = "visible";
-        document.getElementById('confirmPosition').disabled = false;
-      });
-      document.addEventListener('pickerUnset', event => {
+        toggleButton('describeGF', true);
+        toggleButton('describeF', true);
+        toggleButton('describeM', true);
+    });
+    document.addEventListener('pickerUnset', event => {
         console.log('picker unset');
         document.getElementById('firstStep').style.visibility = "visible";
-        document.getElementById('nextStep').style.visibility = "hidden";
-        document.getElementById('confirmPosition').disabled = true;
-      });
-    </script>
-  </body>
+        toggleButton('describeGF', false);
+        toggleButton('describeF', false);
+        toggleButton('describeM', false);
+    });
+    toggleButton('describeGF', false);
+    toggleButton('describeF', false);
+    toggleButton('describeM', false);
+</script>
+</body>
 </html>
