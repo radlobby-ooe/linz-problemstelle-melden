@@ -61,6 +61,16 @@
     <div id="firstStep" style="align: center; text-align: center;"><font face="Verdana">Bitte Position auswählen...</font></div>
 </div>
 <script>
+    function isMobile() {
+        // credit to Timothy Huang for this regex test:
+        // https://dev.to/timhuang/a-simple-way-to-detect-if-browser-is-on-a-mobile-device-with-javascript-44j3
+        if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+            return true
+        }
+        else{
+            return false
+        }
+    }
     function toggleButton(buttonId, visible) {
         if (window.document.documentMode) {
             // on IE do nothing
@@ -77,7 +87,13 @@
     document.getElementById('describeGF').onclick = function () {
         if (pickerApi.picker.isSet()) {
             let pos = pickerApi.picker.getLocation();
-            window.location.href = 'https://docs.google.com/forms/d/e/1FAIpQLSdGOOoSioi46-auNoHvbUVyhrNDCR35rlVl8KHV5Rw9NtgpgQ/viewform?usp=pp_url&entry.1646312533=' + pos;
+            let newUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSdGOOoSioi46-auNoHvbUVyhrNDCR35rlVl8KHV5Rw9NtgpgQ/viewform?usp=pp_url&entry.1646312533=' + pos;
+            if (isMobile()) {
+                // google forms with upload require new window (if not, open it will sometimes fail silently)
+                window.open(newUrl);
+            } else {
+                window.location.href = newUrl;
+            }
         }
     };
     document.getElementById('describeF').onclick = function () {
