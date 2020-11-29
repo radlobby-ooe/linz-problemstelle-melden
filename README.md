@@ -48,7 +48,8 @@ It registers for callbacks pickerSet/pickerUnset to display/hide buttons.
 Click on buttons will get picker location (if set) and call two Google forms with parameter for picked location. We used an option to pre-fill the google form with an URL parameter, search the web for `fill Google Forms with URL parameters` how to do this. 
  
 3rd Option: Send mail with picked location.
-You have to customize you URLs of Google Forms + texts there.
+
+**You have to customize the URLs of your Google Forms + all texts here.**
 
 Contains some special handling, e.g. open form page in new window on mobile web browsers (Google forms with images will not be displayed e.g. in HTML iframes).
 
