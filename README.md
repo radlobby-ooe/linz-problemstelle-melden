@@ -29,7 +29,7 @@ This will compile the files and create files to use in a dist folder, e.g.
 index.html
 list.965e45c7.png
 list-g-f.160661f5.png
-mail.da9586d1
+mail.da9586d1.png
 main.3f84e912.css
 main.9987b0b0.js
 data/poi.png
