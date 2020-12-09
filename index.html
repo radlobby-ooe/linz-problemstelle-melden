@@ -88,12 +88,7 @@
         if (pickerApi.picker.isSet()) {
             let pos = pickerApi.picker.getLocation();
             let newUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSdGOOoSioi46-auNoHvbUVyhrNDCR35rlVl8KHV5Rw9NtgpgQ/viewform?usp=pp_url&entry.1646312533=' + pos;
-            if (isMobile()) {
-                // google forms with upload require new window (if not, open it will sometimes fail silently)
-                window.open(newUrl);
-            } else {
-                window.location.href = newUrl;
-            }
+            window.open(newUrl);
         }
     };
     document.getElementById('describeF').onclick = function () {
